@@ -1,19 +1,13 @@
 import { GoogleGenAI } from "@google/genai";
 import { ChatMessage } from "../types";
 
-const API_KEY = process.env.API_KEY || '';
-
 // Initialize client securely
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const sendMessageToNovaCorps = async (
   history: ChatMessage[],
   newMessage: string
 ): Promise<string> => {
-  if (!API_KEY) {
-    throw new Error("Nova Corps Database Access Denied: Missing API Key.");
-  }
-
   try {
     // We use gemini-2.5-flash for fast, responsive chat interactions
     const model = 'gemini-2.5-flash';
